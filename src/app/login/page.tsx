@@ -21,32 +21,37 @@ export default function Login() {
   }
 
   return (
-    <main className="min-w-[360px] max-w-[600px] mx-auto h-[720px] bg-white text-black">
-      <div className="w-[300px] h-[200px]  mx-auto  border-2 border-gray-300 rounded-lg">
-        <div className="h-fit w-fit mx-auto mt-[2rem] ">
-          <div className="flex w-[240px]">
-            <label className="w-[10rem] text-center">아이디 </label>
-            <input
-              onChange={(event) => setId(event.target.value)}
-              className="w-[10rem] h-[2rem] border-black border-2"
-            />
+    <div className="min-w-[360px] max-w-[600px] mx-auto h-screen bg-white text-black">
+      <div>
+        <h1 className="w-[10rem] text-3xl text-bold text-black mx-auto text-bold pt-[12rem] mb-[4rem] text-center">
+          로그인
+        </h1>
+        <div className="w-[300px] h-[200px]  mx-auto  border-2 border-gray-300 rounded-lg">
+          <div className="h-fit w-fit mx-auto mt-[2rem] ">
+            <div className="flex w-[240px]">
+              <label className="w-[10rem] text-center">아이디 </label>
+              <input
+                onChange={(event) => setId(event.target.value)}
+                className="w-[10rem] h-[2rem] border-black border-2"
+              />
+            </div>
+            <div className="flex w-[240px] my-1">
+              <label className="w-[10rem] text-center">비밀번호 </label>
+              <input
+                type="password"
+                onChange={(event) => setPw(event.target.value)}
+                className="w-[10rem] h-[2rem] border-black border-2"
+              />
+            </div>
+            <button
+              onClick={onClickLoginButton}
+              className="w-[15rem] h-[2rem] mt-4 mx-auto border-2 border-black rounded-lg "
+            >
+              로그인
+            </button>
           </div>
-          <div className="flex w-[240px] my-1">
-            <label className="w-[10rem] text-center">비밀번호 </label>
-            <input
-              type="password"
-              onChange={(event) => setPw(event.target.value)}
-              className="w-[10rem] h-[2rem] border-black border-2"
-            />
-          </div>
-          <button
-            onClick={onClickLoginButton}
-            className="w-[15rem] h-[2rem] mt-4 mx-auto border-2 border-black rounded-lg "
-          >
-            로그인
-          </button>
         </div>
       </div>
-    </main>
+    </div>
   );
 }
