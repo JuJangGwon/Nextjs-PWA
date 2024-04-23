@@ -20,14 +20,13 @@ export default function Main() {
   const [diaryDatas, setDiaryDatas] = useState(days);
 
   return (
-    <main className="min-w-[360px] max-w-[600px] mx-auto h-screen bg-white">
+    <main className="min-w-[360px] max-w-[600px] mx-auto h-svh bg-white">
       {isEditorOpen && (
         <DiaryEditor
           setIsEditorOpen={setIsEditorOpen}
           text={diaryDatas[3].content}
           setDiaryDatas={(str: string) =>
             setDiaryDatas((data: any) => {
-              console.log(data);
               data[3].content = str;
               return data;
             })
@@ -35,7 +34,7 @@ export default function Main() {
         />
       )}
       {!isEditorOpen && (
-        <div className="w-full h-full">
+        <div className="w-full h-fit">
           <DiaryList setDiaryDatas={setDiaryDatas} days={diaryDatas} />
           <DiaryContent
             setIsEditorOpen={setIsEditorOpen}
