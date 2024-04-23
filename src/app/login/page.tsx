@@ -21,7 +21,7 @@ export default function Login() {
   }
 
   return (
-    <main className="min-w-[360px] max-w-[600px] mx-auto h-[720px] bg-white">
+    <main className="min-w-[360px] max-w-[600px] mx-auto h-[720px] bg-white text-black">
       <div className="w-[300px] h-[200px]  mx-auto  border-2 border-gray-300 rounded-lg">
         <div className="h-fit w-fit mx-auto mt-[2rem] ">
           <div className="flex w-[240px]">
