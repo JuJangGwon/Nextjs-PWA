@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Spinner2 from "@/component/Spinner2";
 
 interface DiaryEditorProps {
   setIsEditorOpen: (isOpen: boolean) => void;
@@ -13,8 +14,18 @@ export default function DiaryEditor({
   text,
 }: DiaryEditorProps) {
   const [diaryText, setDiaryText] = useState(text);
+  const [isLoading, setIsLoading] = useState(false);
+
+  function onClickFinish() {
+    setIsLoading(true);
+    let timer = setTimeout(() => {
+      setDiaryDatas(diaryText);
+      setIsEditorOpen(false);
+    }, 3000);
+  }
+
   return (
-    <div className="w-full h-full bg-gray-100">
+    <div className="w-full h-full relative bg-gray-100">
       <div className="w-full flex justify-between px-2 py-2 ">
         <button
           className="px-2 py-1 rounded-sm mt-3"
@@ -37,13 +48,20 @@ export default function DiaryEditor({
       </div>
       <button
         className="border-2 border-slate-200 h-[4rem] w-[92%] mx-4 px-2 py-1 bg-[#01C1F8] text-white rounded-lg"
-        onClick={() => {
-          setDiaryDatas(diaryText);
-          setIsEditorOpen(false);
-        }}
+        onClick={() => onClickFinish()}
       >
         일기 작성 완료
       </button>
+      {isLoading && (
+        <div className="absolute w-full h-full top-0 bg-black bg-opacity-50">
+          <h1 className="text-white text-center mt-[10rem] text-2xl">
+            Ai 감정 분석 진행중
+          </h1>
+          <div className="flex justify-center items-center">
+            <div className="animate-spin rounded-full h-[10rem] w-[10rem]  mt-8 border-t-8 border-b-2 border-purple-500"></div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
