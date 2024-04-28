@@ -5,6 +5,7 @@ import DiaryList from "./component/DiaryList";
 import DiaryContent from "./component/DiaryContent/diaryContent";
 import DiaryAnalyze from "./component/DiaryAnalyze/page";
 import DiaryEditor from "./component/DiaryEditor";
+import DiaryStatics from "./component/DiaryStatistics/page";
 
 const days = [
   { num: 24, days: "WEN", content: "" },
@@ -19,10 +20,13 @@ const days = [
 export default function Main() {
   const [isEditorOpen, setIsEditorOpen] = useState(false);
   const [isAnalize, setIsAnalize] = useState(true);
+  const [isStatics, setIsStatics] = useState(false);
   const [diaryDatas, setDiaryDatas] = useState(days);
 
   return (
     <main className="min-w-[360px] max-w-[600px] mx-auto h-svh bg-white">
+      {isStatics && <DiaryStatics onClickExist={() => setIsStatics(false)} />}
+
       {isEditorOpen &&
         (isAnalize ? (
           <DiaryEditor
@@ -38,9 +42,13 @@ export default function Main() {
         ) : (
           <DiaryAnalyze setIsEditorOpen={setIsEditorOpen} />
         ))}
-      {!isEditorOpen && (
+      {!isEditorOpen && !isStatics && (
         <div className="w-full h-fit">
-          <DiaryList setDiaryDatas={setDiaryDatas} days={diaryDatas} />
+          <DiaryList
+            setDiaryDatas={setDiaryDatas}
+            setIsStatics={setIsStatics}
+            days={diaryDatas}
+          />
           <DiaryContent
             setIsEditorOpen={setIsEditorOpen}
             diaryData={diaryDatas[3]}
