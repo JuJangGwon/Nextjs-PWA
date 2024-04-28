@@ -14,33 +14,36 @@ export default function DiaryEditor({
 }: DiaryEditorProps) {
   const [diaryText, setDiaryText] = useState(text);
   return (
-    <div className="w-full h-full">
-      <div className="flex justify-between px-2 py-2">
+    <div className="w-full h-full bg-gray-100">
+      <div className="w-full flex justify-between px-2 py-2 ">
         <button
-          className="border-2 border-slate-200 px-2 py-1 rounded-sm"
+          className="px-2 py-1 rounded-sm mt-3"
           onClick={() => setIsEditorOpen(false)}
         >
-          뒤로 가기
+          {"<"}
         </button>
-        <h1 className="text-xl">일기 작성 </h1>
-        <button
-          className="border-2 border-slate-200 px-2 py-1 rounded-sm"
-          onClick={() => {
-            setDiaryDatas(diaryText);
-            setIsEditorOpen(false);
-          }}
-        >
-          작성 완료
-        </button>
+        <h1 className="text-xl mt-3 font-semibold">오늘의 일기 </h1>
+        <div />
       </div>
-      <div className="flex justify-center">
+      <div className="w-full mx-4 justify-center">
+        <div className="w-[92%] bg-white h-[3rem] my-auto">
+          <p className="py-3 py-auto my-auto px-1">{"24.05.01"}</p>
+        </div>
         <input
           value={diaryText}
-          className="my-4 h-[600px] w-[95%] bg-gray-200 "
+          className="my-4 h-[600px] w-[92%] bg-white"
           onChange={(event) => setDiaryText(event.target.value)}
-          placeholder="내용을 작성해주세요."
         />
       </div>
+      <button
+        className="border-2 border-slate-200 h-[4rem] w-[92%] mx-4 px-2 py-1 bg-[#01C1F8] text-white rounded-lg"
+        onClick={() => {
+          setDiaryDatas(diaryText);
+          setIsEditorOpen(false);
+        }}
+      >
+        일기 작성 완료
+      </button>
     </div>
   );
 }
