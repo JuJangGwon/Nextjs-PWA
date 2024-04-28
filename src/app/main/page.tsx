@@ -3,6 +3,7 @@ import { useState } from "react";
 
 import DiaryList from "./component/DiaryList";
 import DiaryContent from "./component/DiaryContent/diaryContent";
+import DiaryAnalyze from "./component/DiaryAnalyze/page";
 import DiaryEditor from "./component/DiaryEditor";
 
 const days = [
@@ -17,22 +18,26 @@ const days = [
 
 export default function Main() {
   const [isEditorOpen, setIsEditorOpen] = useState(false);
+  const [isAnalize, setIsAnalize] = useState(true);
   const [diaryDatas, setDiaryDatas] = useState(days);
 
   return (
     <main className="min-w-[360px] max-w-[600px] mx-auto h-svh bg-white">
-      {isEditorOpen && (
-        <DiaryEditor
-          setIsEditorOpen={setIsEditorOpen}
-          text={diaryDatas[3].content}
-          setDiaryDatas={(str: string) =>
-            setDiaryDatas((data: any) => {
-              data[3].content = str;
-              return data;
-            })
-          }
-        />
-      )}
+      {isEditorOpen &&
+        (isAnalize ? (
+          <DiaryEditor
+            setIsEditorOpen={setIsAnalize}
+            text={diaryDatas[3].content}
+            setDiaryDatas={(str: string) =>
+              setDiaryDatas((data: any) => {
+                data[3].content = str;
+                return data;
+              })
+            }
+          />
+        ) : (
+          <DiaryAnalyze setIsEditorOpen={setIsEditorOpen} />
+        ))}
       {!isEditorOpen && (
         <div className="w-full h-fit">
           <DiaryList setDiaryDatas={setDiaryDatas} days={diaryDatas} />
