@@ -25,9 +25,27 @@ export default function DiaryAnalyze({ setIsEditorOpen }: any) {
       <div className="w-full mx-4 mt-6">
         <h2 className="text-black font-bold mb-2">오늘 나는</h2>
         <div className="bg-white w-[92%] h-[16rem] rounded-md">
-          <p className="w-full h-full px-4 py-4">
-            오늘 사용자님 작성해주신 일기를 분석한 결과 오늘 사용자님은
-            즐거우시군요?
+          <div className="flex w-[92%] mx-auto pt-8">
+            <p className="mx-3 font-bold ">긍정</p>
+            <div className="w-[80%] h-[1.6rem] bg-gray-200 rounded-full overflow-hidden">
+              <div className="w-[80%] h-[1.6rem] bg-green-500  rounded-full overflow-hidden" />
+            </div>
+          </div>
+          <div className="flex w-[92%] mx-auto mt-2">
+            <p className="mx-3 font-bold ">중립</p>
+            <div className="w-[80%] h-[1.6rem] bg-gray-200 rounded-full overflow-hidden">
+              <div className="w-[30%] h-[1.6rem] bg-yellow-500  rounded-full overflow-hidden" />
+            </div>
+          </div>
+          <div className="flex w-[92%] mx-auto my-2">
+            <p className="mx-3 font-bold ">부정</p>
+            <div className="w-[80%] h-[1.6rem] bg-gray-200 rounded-full overflow-hidden">
+              <div className="w-[1%] h-[1.6rem] bg-red-500  rounded-full overflow-hidden" />
+            </div>
+          </div>
+          <p className="w-full h-full px-10 py-4">
+            오늘 사용자님 즐거우시군요?
+            <br />
             <br />
           </p>
         </div>
