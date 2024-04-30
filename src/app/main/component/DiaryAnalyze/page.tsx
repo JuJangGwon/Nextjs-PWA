@@ -17,7 +17,7 @@ export default function DiaryAnalyze({ setIsEditorOpen }: any) {
         <div className="bg-white w-[92%] h-[7rem] rounded-md flex">
           <div className="w-[5rem] h-[5rem] bg-gray-300 my-auto mx-6"></div>
           <div className="my-auto">
-            <p className="text-black font-bold text-xl">감정 : 즐거움</p>
+            <p className="text-black font-bold text-xl">감정 : 행복함</p>
             <p className="text-gray-600 font-semibold mt-2">24.04.30</p>
           </div>
         </div>
