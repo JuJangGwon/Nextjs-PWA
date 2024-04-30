@@ -1,8 +1,4 @@
-interface DiaryAnalyzeType {
-  setIsEditorOpen: (isOpen: boolean) => void;
-}
-
-export default function DiaryAnalyze({ setIsEditorOpen }: DiaryAnalyzeType) {
+export default function DiaryAnalyze({ setIsEditorOpen }: any) {
   return (
     <div className="bg-gray-100 w-full h-full">
       <div className="flex justify-between">
