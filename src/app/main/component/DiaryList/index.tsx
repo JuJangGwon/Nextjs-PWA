@@ -6,7 +6,7 @@ function DiaryList({ setIsStatics, days }: any) {
   return (
     <div className="bg-[#01C1F8] w-full">
       <DiaryListHeader />
-      <FeelContent setIsStatics={setIsStatics} />
+      <FeelContent  days ={days} setIsStatics={setIsStatics} />
       <DaySelection days={days} />
     </div>
   );

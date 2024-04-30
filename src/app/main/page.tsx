@@ -8,13 +8,13 @@ import DiaryEditor from "./component/DiaryEditor";
 import DiaryStatics from "./component/DiaryStatistics/page";
 
 const days = [
-  { num: 24, days: "WEN", content: "" },
-  { num: 25, days: "THU", content: "" },
-  { num: 26, days: "FRI", content: "" },
-  { num: 27, days: "SAT", content: "" },
-  { num: 28, days: "SUN", content: "" },
-  { num: 29, days: "MON", content: "" },
-  { num: 30, days: "TUE", content: "" },
+  { num: 27, days: "SUN", content: "" },
+  { num: 28, days: "MON", content: "" },
+  { num: 29, days: "TUE", content: "" },
+  { num: 30, days: "WEN", content: "" },
+  { num: 1, days: "THU", content: "" },
+  { num: 2, days: "FRI", content: "" },
+  { num: 3, days: "SAT", content: "" },
 ];
 
 export default function Main() {
@@ -24,7 +24,7 @@ export default function Main() {
   const [diaryDatas, setDiaryDatas] = useState(days);
 
   return (
-    <main className="min-w-[360px] max-w-[600px] mx-auto h-svh bg-white">
+    <main className="min-w-[360px] max-w-[600px] mx-auto h-full bg-white">
       {isStatics && <DiaryStatics onClickExist={() => setIsStatics(false)} />}
 
       {isEditorOpen &&

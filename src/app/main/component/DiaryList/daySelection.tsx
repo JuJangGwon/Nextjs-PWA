@@ -9,13 +9,21 @@ export default function DaySelection({ days }: any) {
           >
             <p className="text-center">{item.num}</p>
             <p className="text-center text-slate-200">{item.days}</p>
-            <div className="w-[93%] h-[55%] border-2 mx-auto bg-gray-200"></div>
+            <div className="w-[93%] h-[55%] border-2 mx-auto bg-gray-200">
+              {item.content.length > 1 ? (
+                <p className="text-black text-center text-xl">{"행복"}</p>
+              ) : null}{" "}
+            </div>
           </div>
         ) : (
           <div className="w-full mx-auto mt-2" key={item.days}>
             <p className="text-center">{item.num}</p>
             <p className="text-center text-slate-200">{item.days}</p>
-            <div className="w-[93%] h-[55%] mx-auto border-2 bg-gray-200"></div>
+            <div className="w-[93%] h-[55%] mx-auto border-2 bg-gray-200">
+              {item.content.length > 1 ? (
+                <p className="text-black text-center text-xl">{"행복"}</p>
+              ) : null}{" "}
+            </div>
           </div>
         )
       )}

@@ -36,7 +36,7 @@ export default function DiaryStatics({ onClickExist }: any) {
         </button>
       </div>
       {selected ? (
-        <div>
+        <div className="bg-white ">
           <div className="bg-white w-[92%] h-[21rem] mx-4 mt-4">
             <h1 className="mx-auto text-black text-center text-xl text-bold mt-2">
               주간 통계

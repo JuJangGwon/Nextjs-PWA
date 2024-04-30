@@ -25,7 +25,7 @@ export default function DiaryEditor({
   }
 
   return (
-    <div className="w-full h-full relative bg-gray-100">
+    <div className="w-full h-fit relative bg-gray-100">
       <div className="w-full flex justify-between px-2 py-2 ">
         <button
           className="px-2 py-1 rounded-sm mt-3"
@@ -65,5 +65,3 @@ export default function DiaryEditor({
     </div>
   );
 }
-
-
