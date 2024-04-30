@@ -1,3 +1,5 @@
+"use client";
+
 export default function DiaryAnalyze({ setIsEditorOpen }: any) {
   return (
     <div className="bg-gray-100 w-full h-full">

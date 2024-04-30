@@ -1,6 +1,6 @@
 "use client";
+
 import { useState } from "react";
-import Spinner2 from "@/component/Spinner2";
 
 interface DiaryEditorProps {
   setIsEditorOpen: (isOpen: boolean) => void;
@@ -18,7 +18,7 @@ export default function DiaryEditor({
 
   function onClickFinish() {
     setIsLoading(true);
-    let timer = setTimeout(() => {
+    setTimeout(() => {
       setDiaryDatas(diaryText);
       setIsEditorOpen(false);
     }, 3000);
@@ -38,7 +38,7 @@ export default function DiaryEditor({
       </div>
       <div className="w-full mx-4 justify-center">
         <div className="w-[92%] bg-white h-[3rem] my-auto">
-          <p className="py-3 py-auto my-auto px-1">{"24.05.01"}</p>
+          <p className="py-3 py-auto my-auto px-1">{"24.04.30"}</p>
         </div>
         <input
           value={diaryText}

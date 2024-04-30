@@ -1,3 +1,4 @@
+"use client";
 interface DiaryContentProps {
   diaryData: any;
   setIsEditorOpen: (isOpen: boolean) => void;
