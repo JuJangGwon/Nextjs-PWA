@@ -16,12 +16,17 @@ export default function DiaryEditor({
   const [diaryText, setDiaryText] = useState(text);
   const [isLoading, setIsLoading] = useState(false);
 
+  const newDate = new Date();
   function onClickFinish() {
-    setIsLoading(true);
-    setTimeout(() => {
-      setDiaryDatas(diaryText);
-      setIsEditorOpen(false);
-    }, 3000);
+    if (diaryText.length >= 30) {
+      setIsLoading(true);
+      setTimeout(() => {
+        setDiaryDatas(diaryText);
+        setIsEditorOpen(false);
+      }, 3000);
+    } else {
+      alert("일기 내용을 최소 30자 이상 입력해주세요");
+    }
   }
 
   return (
@@ -38,9 +43,11 @@ export default function DiaryEditor({
       </div>
       <div className="w-full mx-4 justify-center">
         <div className="w-[92%] bg-white h-[3rem] my-auto">
-          <p className="py-3 py-auto my-auto px-1">{"24.04.30"}</p>
+          <p className="py-3 py-auto my-auto px-1">{`${newDate.getFullYear()}.${
+            newDate.getMonth() + 1
+          }.${newDate.getDate()}`}</p>
         </div>
-        <input
+        <textarea
           value={diaryText}
           className="my-4 h-[600px] w-[92%] bg-white"
           onChange={(event) => setDiaryText(event.target.value)}

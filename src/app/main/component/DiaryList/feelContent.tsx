@@ -4,7 +4,7 @@ export default function FeelContent({ days, setIsStatics }: any) {
       <div className="w-fit mx-auto">
         <h1 className="text-white my-2">제일 많이 느낀 감정</h1>
         <div className="bg-gray-200 w-[7rem] h-[7rem]">
-          <p className="text-xl text-black text-center py-12">행복함</p>
+          <p className="text-xl text-black text-center py-12">데이터 부족</p>
         </div>
         <button className="text-white my-2" onClick={() => setIsStatics(true)}>
           {" "}
