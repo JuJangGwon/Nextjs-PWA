@@ -38,6 +38,7 @@ export default function feelChecker(t: string) {
     "불만",
     "성남",
     "악",
+    "불행",
     "울분",
     "실망",
     "불쾌",

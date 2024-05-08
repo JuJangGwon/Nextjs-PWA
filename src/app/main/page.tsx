@@ -76,6 +76,8 @@ const days = [
   },
 ];
 
+
+
 export default function Main() {
   const [isEditorOpen, setIsEditorOpen] = useState(false);
   const [isAnalize, setIsAnalize] = useState(true);
@@ -84,7 +86,9 @@ export default function Main() {
 
   return (
     <main className="min-w-[360px] max-w-[600px] mx-auto h-full bg-white">
-      {isStatics && <DiaryStatics onClickExist={() => setIsStatics(false)} />}
+      {isStatics && (
+        <DiaryStatics onClickExist={() => setIsStatics(false)} days={days} />
+      )}
 
       {isEditorOpen &&
         (isAnalize ? (

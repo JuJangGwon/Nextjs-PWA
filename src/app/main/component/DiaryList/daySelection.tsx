@@ -1,11 +1,30 @@
+"use client";
+
+import { useState, useEffect } from "react";
+
 export default function DaySelection({ days }: any) {
-  let emoticons = "😌";
-  if (days.feel === "happy") {
-    emoticons = "😁";
-  } else if (days.feel === "angry") {
-    emoticons = "😡";
-  } else if (days.feel === "normal") {
-    emoticons = "😌";
+  const [emoticons, setEmoticons] = useState("😌");
+
+  useEffect(() => {
+    if (days.feel === "happy") {
+      setEmoticons("😁");
+    } else if (days.feel === "angry") {
+      setEmoticons("😡");
+    } else if (days.feel === "normal") {
+      setEmoticons("😌");
+    }
+    console.log(days);
+  }, [days]);
+
+  function getEmoticons(item: any) {
+    if (item.feel === "happy") {
+      return "😁";
+    } else if (item.feel === "angry") {
+      return "😡";
+    } else if (item.feel === "normal") {
+      return "😌";
+    }
+    return "";
   }
 
   return (
@@ -20,7 +39,9 @@ export default function DaySelection({ days }: any) {
             <p className="text-center text-slate-200">{item.days}</p>
             <div className="w-[93%] h-[55%] border-2 mx-auto bg-gray-200">
               {item.content.length > 1 ? (
-                <p className="text-black text-center text-6xl">{emoticons}</p>
+                <p className="text-black text-center text-6xl">
+                  {getEmoticons(item)}
+                </p>
               ) : null}{" "}
             </div>
           </div>
@@ -30,7 +51,9 @@ export default function DaySelection({ days }: any) {
             <p className="text-center text-slate-200">{item.days}</p>
             <div className="w-[93%] h-[55%] mx-auto border-2 bg-gray-200">
               {item.content.length > 1 ? (
-                <p className="text-black text-center text-6xl">{emoticons}</p>
+                <p className="text-black text-center text-6xl">
+                  {getEmoticons(item)}
+                </p>
               ) : null}{" "}
             </div>
           </div>
