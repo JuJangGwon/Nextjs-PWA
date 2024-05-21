@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 
 export default function DiaryStatics({ onClickExist, days }: any) {
   const [selected, setSelected] = useState(true);
-  const [status, setStatus] = useState("");
+  const [emoticon, setEmoticon] = useState("");
+  const [status, setStatus] = useState("none");
   useEffect(() => {
     if (days) {
       let happy = 0;
@@ -21,12 +22,18 @@ export default function DiaryStatics({ onClickExist, days }: any) {
           normal++;
         }
       });
-      if (happy > angry && normal < happy) {
+      if (happy === 0 && angry === 0 && normal === 0) {
+        setStatus("none");
+        setEmoticon("😁");
+      } else if (happy > angry && normal < happy) {
         setStatus("긍정적");
+        setEmoticon("😁");
       } else if (happy < angry && normal < angry) {
         setStatus("부정적");
+        setEmoticon("😡");
       } else if (happy === angry || (normal > happy && normal > angry)) {
         setStatus("중립적");
+        setEmoticon("😌");
       }
     }
   }, [days]);
@@ -144,7 +151,21 @@ export default function DiaryStatics({ onClickExist, days }: any) {
       </div>
     );
   }
-
+  if (status === "none") {
+    return (
+      <div className="w-full h-screen bg-gray-50">
+        <button
+          onClick={() => onClickExist(false)}
+          className="ml-4 pt-4 text-xl"
+        >
+          X
+        </button>
+        <p className="mx-auto w-fit text-center text-xl pt-[6rem]">
+          데이터가 부족합니다.. <br /> 일기를 작성해주세요!
+        </p>
+      </div>
+    );
+  }
   return (
     <div className="w-full h-screen bg-gray-50">
       <div className="flex justify-between pt-8 mx-4">
@@ -181,10 +202,12 @@ export default function DiaryStatics({ onClickExist, days }: any) {
           <div className="bg-white w-[92%] h-[21rem] mx-4 mt-4">
             <h1 className="mx-auto text-black text-center text-xl text-bold mt-2">
               주간 통계
+              <p className="w-[9rem] h-[9rem] mx-auto bg-gray-200 mt-4 text-8xl py-5">
+                {emoticon}
+              </p>
             </h1>
             {status !== "" ? (
               <div>
-                <div className="w-[9rem] h-[9rem] mx-auto bg-gray-200 mt-4"></div>
                 <p className="text-center font-bold my-2">
                   {`주장권님의 감정은 ${status}일 때가 많아요`}
                 </p>

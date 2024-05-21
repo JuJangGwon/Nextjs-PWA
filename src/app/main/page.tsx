@@ -30,61 +30,66 @@ function getDayOfWeek(newDate: Date, num: number = 0) {
       return "SAT";
   }
 }
+const localContents = (day: number) => {
+  const data = localStorage.getItem(`${day.toString()}c`);
+  return data ? data : "";
+};
+
+const localFeel = (day: number) => {
+  const data = localStorage.getItem(`${day.toString()}f`);
+  return data ? data : "";
+};
 
 const days = [
   {
     num: newDate.getDate() - 3,
     days: getDayOfWeek(newDate, -3),
-    content: "",
-    feel: "",
+    content: localContents(newDate.getDate() - 3),
+    feel: localFeel(newDate.getDate() - 3),
   },
   {
     num: newDate.getDate() - 2,
     days: getDayOfWeek(newDate, -2),
-    content: "",
-    feel: "",
+    content: localContents(newDate.getDate() - 2),
+    feel: localFeel(newDate.getDate() - 2),
   },
   {
     num: newDate.getDate() - 1,
     days: getDayOfWeek(newDate, -1),
-    content: "",
-    feel: "",
+    content: localContents(newDate.getDate() - 1),
+    feel: localFeel(newDate.getDate() - 1),
   },
   {
     num: newDate.getDate(),
     days: getDayOfWeek(newDate),
-    content: "",
-    feel: "",
+    content: localContents(newDate.getDate()),
+    feel: localFeel(newDate.getDate()),
   },
   {
     num: newDate.getDate() + 1,
     days: getDayOfWeek(newDate, 1),
-    content: "",
-    feel: "",
+    content: localContents(newDate.getDate() + 1),
+    feel: localFeel(newDate.getDate() + 1),
   },
   {
     num: newDate.getDate() + 2,
     days: getDayOfWeek(newDate, 2),
-    content: "",
-    feel: "",
+    content: localContents(newDate.getDate() + 2),
+    feel: localFeel(newDate.getDate() + 2),
   },
   {
     num: newDate.getDate() + 3,
     days: getDayOfWeek(newDate, 3),
-    content: "",
-    feel: "",
+    content: localContents(newDate.getDate() + 3),
+    feel: localFeel(newDate.getDate() + 3),
   },
 ];
 
 export default function Main() {
   const [isEditorOpen, setIsEditorOpen] = useState(false);
-  const [isAnalize, setIsAnalize] = useState(true);
+  const [isAnalize, setIsAnalize] = useState(days[3].content ? true : false);
   const [isStatics, setIsStatics] = useState(false);
   const [diaryDatas, setDiaryDatas] = useState(days);
-
-  useEffect(() => {
-    console.log(isAnalize, isStatics, isEditorOpen);
-  }, [isAnalize, isStatics, isEditorOpen]);
 
   return (
     <main className="min-w-[360px] max-w-[600px] mx-auto h-full bg-white">
@@ -102,7 +107,8 @@ export default function Main() {
             setDiaryDatas={(str: string) =>
               setDiaryDatas((data: any) => {
                 const stat = feelChecker(str);
-                console.log(stat);
+                localStorage.setItem(`${newDate.getDate().toString()}c`, str);
+                localStorage.setItem(`${newDate.getDate().toString()}f`, stat);
                 if (stat !== "fail") {
                   data[3].content = str;
                   data[3].feel = stat;

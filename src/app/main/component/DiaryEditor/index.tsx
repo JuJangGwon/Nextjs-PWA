@@ -10,6 +10,8 @@ interface DiaryEditorProps {
   setIsAnalize: (b: boolean) => void;
 }
 
+const newDate = new Date();
+
 export default function DiaryEditor({
   setIsEditorOpen,
   setDiaryDatas,
@@ -20,7 +22,6 @@ export default function DiaryEditor({
   const [diaryText, setDiaryText] = useState(text);
   const [isLoading, setIsLoading] = useState(false);
 
-  const newDate = new Date();
   function onClickFinish() {
     if (diaryText.length >= 30) {
       setIsLoading(true);
