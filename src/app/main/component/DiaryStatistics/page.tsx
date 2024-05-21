@@ -208,10 +208,10 @@ export default function DiaryStatics({ onClickExist, days }: any) {
                     <div
                       className={`w-[${
                         status === "긍정적"
-                          ? "30"
+                          ? "0.1"
                           : status === "부정적"
-                          ? "30"
-                          : "64"
+                          ? "0.1"
+                          : "0.1"
                       }%] h-[1.6rem] bg-yellow-500  rounded-full overflow-hidden`}
                     />
                   </div>

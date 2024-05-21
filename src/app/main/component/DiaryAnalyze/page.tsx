@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
 
-import feelChecker from "@/utils/feelChecker";
 export default function DiaryAnalyze({
   setIsEditorOpen,
   feel,
@@ -18,27 +17,29 @@ export default function DiaryAnalyze({
     if (feel === "happy") {
       setEmoticons("😁");
       setMine("행복함");
-      setNum1(70 + Math.floor(Math.random()) * 15 + 1);
-      setNum2(Math.floor(Math.random()) * 20 + 1);
+      setNum1(8 + Math.floor(Math.random() * 5));
+      setNum2(4 + Math.floor(Math.random() * 4));
+      setNum3(1);
+      console.log("h");
     } else if (feel === "angry") {
       setEmoticons("😡");
       setMine("화남");
-      setNum3(60 + Math.floor(Math.random()) * 15 + 1);
-      setNum2(Math.floor(Math.random()) * 20 + 1);
+      setNum3(10 + Math.random() * 15);
+      setNum2(Math.random() * 20 + 1);
+      console.log("hh");
     } else if (feel === "normal") {
       setEmoticons("😌");
       setMine("평범");
-      setNum3(Math.floor(Math.random()) * 45 + 1);
-      setNum2(60 + Math.floor(Math.random()) * 20 + 1);
+      setNum3(Math.floor(Math.random() * 45) + 1);
+      setNum2(10 + Math.floor(Math.random() * 20) + 1);
       setNum1(Math.floor(Math.random()) * 50 + 1);
+      console.log("hhh");
     }
-    console.log(feel);
-    console.log(mine);
   }, [feel]);
 
   useEffect(() => {
     console.log(num1, num2, num3);
-  });
+  }, [num1, num2, num3]);
 
   return (
     <div className="bg-gray-100 w-full h-full">
@@ -74,7 +75,7 @@ export default function DiaryAnalyze({
                 <p className="mx-3 font-bold ">긍정</p>
                 <div className="w-[80%] h-[1.6rem] bg-gray-200 rounded-full overflow-hidden">
                   <div
-                    className={`w-[${num1}%] h-[1.6rem] bg-green-500  rounded-full overflow-hidden`}
+                    className={`w-[${num1}rem] h-[1.6rem] bg-green-500  rounded-full overflow-hidden`}
                   />
                 </div>
               </div>
@@ -82,7 +83,7 @@ export default function DiaryAnalyze({
                 <p className="mx-3 font-bold ">중립</p>
                 <div className="w-[80%] h-[1.6rem] bg-gray-200 rounded-full overflow-hidden">
                   <div
-                    className={`w-[${num2}%] h-[1.6rem] bg-yellow-500  rounded-full overflow-hidden`}
+                    className={`w-[${num2}px] h-[1.6rem] bg-yellow-500  rounded-full overflow-hidden`}
                   />
                 </div>
               </div>
@@ -90,7 +91,7 @@ export default function DiaryAnalyze({
                 <p className="mx-3 font-bold ">부정</p>
                 <div className="w-[80%] h-[1.6rem] bg-gray-200 rounded-full overflow-hidden">
                   <div
-                    className={`w-[${num3}%] h-[1.6rem] bg-red-500  rounded-full overflow-hidden`}
+                    className={`w-[${num3}px] h-[1.6rem] bg-red-500  rounded-full overflow-hidden`}
                   />
                 </div>
               </div>

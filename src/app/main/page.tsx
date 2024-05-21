@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import feelChecker from "@/utils/feelChecker";
 import DiaryList from "./component/DiaryList";
@@ -76,13 +76,15 @@ const days = [
   },
 ];
 
-
-
 export default function Main() {
   const [isEditorOpen, setIsEditorOpen] = useState(false);
   const [isAnalize, setIsAnalize] = useState(true);
   const [isStatics, setIsStatics] = useState(false);
   const [diaryDatas, setDiaryDatas] = useState(days);
+
+  useEffect(() => {
+    console.log(isAnalize, isStatics, isEditorOpen);
+  }, [isAnalize, isStatics, isEditorOpen]);
 
   return (
     <main className="min-w-[360px] max-w-[600px] mx-auto h-full bg-white">
@@ -91,9 +93,11 @@ export default function Main() {
       )}
 
       {isEditorOpen &&
-        (isAnalize ? (
+        (!isAnalize ? (
           <DiaryEditor
-            setIsEditorOpen={setIsAnalize}
+            setIsAnalize={setIsAnalize}
+            setIsStatics={setIsStatics}
+            setIsEditorOpen={setIsEditorOpen}
             text={diaryDatas[3].content}
             setDiaryDatas={(str: string) =>
               setDiaryDatas((data: any) => {

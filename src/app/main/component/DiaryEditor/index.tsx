@@ -6,12 +6,16 @@ interface DiaryEditorProps {
   setIsEditorOpen: (isOpen: boolean) => void;
   text: string;
   setDiaryDatas: (text: string) => void;
+  setIsStatics: (b: boolean) => void;
+  setIsAnalize: (b: boolean) => void;
 }
 
 export default function DiaryEditor({
   setIsEditorOpen,
   setDiaryDatas,
+  setIsAnalize,
   text,
+  setIsStatics,
 }: DiaryEditorProps) {
   const [diaryText, setDiaryText] = useState(text);
   const [isLoading, setIsLoading] = useState(false);
@@ -23,6 +27,7 @@ export default function DiaryEditor({
       setTimeout(() => {
         setDiaryDatas(diaryText);
         setIsEditorOpen(false);
+        setIsAnalize(true);
       }, 3000);
     } else {
       alert("일기 내용을 최소 30자 이상 입력해주세요");
@@ -34,7 +39,11 @@ export default function DiaryEditor({
       <div className="w-full flex justify-between px-2 py-2 ">
         <button
           className="px-2 py-1 rounded-sm mt-3"
-          onClick={() => setIsEditorOpen(false)}
+          onClick={() => {
+            setIsEditorOpen(false);
+            setIsAnalize(false);
+            setIsStatics(false);
+          }}
         >
           {"<"}
         </button>
@@ -49,7 +58,7 @@ export default function DiaryEditor({
         </div>
         <textarea
           value={diaryText}
-          className="my-4 h-[600px] w-[92%] bg-white"
+          className="my-4 h-[600px] w-[92%] bg-white focus:outline-none px-2 py-1"
           onChange={(event) => setDiaryText(event.target.value)}
         />
       </div>
