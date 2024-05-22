@@ -1,5 +1,6 @@
 "use client";
-import { useState, useEffect } from "react";
+
+import { useState } from "react";
 
 import feelChecker from "@/utils/feelChecker";
 import DiaryList from "./component/DiaryList";
@@ -31,61 +32,67 @@ function getDayOfWeek(newDate: Date, num: number = 0) {
   }
 }
 const localContents = (day: number) => {
-  const data = localStorage.getItem(`${day.toString()}c`);
+  let data = null;
+  if (typeof window !== "undefined") {
+    data = localStorage.getItem(`${day.toString()}c`);
+  }
   return data ? data : "";
 };
 
 const localFeel = (day: number) => {
-  const data = localStorage.getItem(`${day.toString()}f`);
+  let data = null;
+  if (typeof window !== "undefined") {
+    data = localStorage.getItem(`${day.toString()}f`);
+  }
   return data ? data : "";
 };
 
-const days = [
-  {
-    num: newDate.getDate() - 3,
-    days: getDayOfWeek(newDate, -3),
-    content: localContents(newDate.getDate() - 3),
-    feel: localFeel(newDate.getDate() - 3),
-  },
-  {
-    num: newDate.getDate() - 2,
-    days: getDayOfWeek(newDate, -2),
-    content: localContents(newDate.getDate() - 2),
-    feel: localFeel(newDate.getDate() - 2),
-  },
-  {
-    num: newDate.getDate() - 1,
-    days: getDayOfWeek(newDate, -1),
-    content: localContents(newDate.getDate() - 1),
-    feel: localFeel(newDate.getDate() - 1),
-  },
-  {
-    num: newDate.getDate(),
-    days: getDayOfWeek(newDate),
-    content: localContents(newDate.getDate()),
-    feel: localFeel(newDate.getDate()),
-  },
-  {
-    num: newDate.getDate() + 1,
-    days: getDayOfWeek(newDate, 1),
-    content: localContents(newDate.getDate() + 1),
-    feel: localFeel(newDate.getDate() + 1),
-  },
-  {
-    num: newDate.getDate() + 2,
-    days: getDayOfWeek(newDate, 2),
-    content: localContents(newDate.getDate() + 2),
-    feel: localFeel(newDate.getDate() + 2),
-  },
-  {
-    num: newDate.getDate() + 3,
-    days: getDayOfWeek(newDate, 3),
-    content: localContents(newDate.getDate() + 3),
-    feel: localFeel(newDate.getDate() + 3),
-  },
-];
-
 export default function Main() {
+  const days = [
+    {
+      num: newDate.getDate() - 3,
+      days: getDayOfWeek(newDate, -3),
+      content: localContents(newDate.getDate() - 3),
+      feel: localFeel(newDate.getDate() - 3),
+    },
+    {
+      num: newDate.getDate() - 2,
+      days: getDayOfWeek(newDate, -2),
+      content: localContents(newDate.getDate() - 2),
+      feel: localFeel(newDate.getDate() - 2),
+    },
+    {
+      num: newDate.getDate() - 1,
+      days: getDayOfWeek(newDate, -1),
+      content: localContents(newDate.getDate() - 1),
+      feel: localFeel(newDate.getDate() - 1),
+    },
+    {
+      num: newDate.getDate(),
+      days: getDayOfWeek(newDate),
+      content: localContents(newDate.getDate()),
+      feel: localFeel(newDate.getDate()),
+    },
+    {
+      num: newDate.getDate() + 1,
+      days: getDayOfWeek(newDate, 1),
+      content: localContents(newDate.getDate() + 1),
+      feel: localFeel(newDate.getDate() + 1),
+    },
+    {
+      num: newDate.getDate() + 2,
+      days: getDayOfWeek(newDate, 2),
+      content: localContents(newDate.getDate() + 2),
+      feel: localFeel(newDate.getDate() + 2),
+    },
+    {
+      num: newDate.getDate() + 3,
+      days: getDayOfWeek(newDate, 3),
+      content: localContents(newDate.getDate() + 3),
+      feel: localFeel(newDate.getDate() + 3),
+    },
+  ];
+
   const [isEditorOpen, setIsEditorOpen] = useState(false);
   const [isAnalize, setIsAnalize] = useState(days[3].content ? true : false);
   const [isStatics, setIsStatics] = useState(false);

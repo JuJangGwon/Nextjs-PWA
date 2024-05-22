@@ -215,13 +215,16 @@ export default function DiaryStatics({ onClickExist, days }: any) {
                   <p className="mx-3 font-bold ">긍정</p>
                   <div className="w-[80%] h-[1.6rem] bg-gray-200 rounded-full overflow-hidden">
                     <div
-                      className={`w-[${
-                        status === "긍정적"
-                          ? "60"
-                          : status === "부정적"
-                          ? "1"
-                          : "20"
-                      }%] h-[1.6rem] bg-green-500  rounded-full overflow-hidden`}
+                      className={`h-[1.6rem] bg-green-500  rounded-full overflow-hidden`}
+                      style={{
+                        width: `${
+                          status === "긍정적"
+                            ? "60%"
+                            : status === "부정적"
+                            ? "1%"
+                            : "20%"
+                        }`,
+                      }}
                     />
                   </div>
                 </div>
@@ -229,13 +232,16 @@ export default function DiaryStatics({ onClickExist, days }: any) {
                   <p className="mx-3 font-bold ">중립</p>
                   <div className="w-[80%] h-[1.6rem] bg-gray-200 rounded-full overflow-hidden">
                     <div
-                      className={`w-[${
-                        status === "긍정적"
-                          ? "0.1"
-                          : status === "부정적"
-                          ? "0.1"
-                          : "0.1"
-                      }%] h-[1.6rem] bg-yellow-500  rounded-full overflow-hidden`}
+                      className={`h-[1.6rem] bg-yellow-500  rounded-full overflow-hidden`}
+                      style={{
+                        width: `${
+                          status === "긍정적"
+                            ? "20%"
+                            : status === "부정적"
+                            ? "25%"
+                            : "70%"
+                        }`,
+                      }}
                     />
                   </div>
                 </div>
@@ -243,13 +249,16 @@ export default function DiaryStatics({ onClickExist, days }: any) {
                   <p className="mx-3 font-bold ">부정</p>
                   <div className="w-[80%] h-[1.6rem] bg-gray-200 rounded-full overflow-hidden">
                     <div
-                      className={`w-[${
-                        status === "긍정적"
-                          ? "1"
-                          : status === "부정적"
-                          ? "62"
-                          : "20"
-                      }%] h-[1.6rem] bg-red-500  rounded-full overflow-hidden`}
+                      className={`h-[1.6rem] bg-red-500  rounded-full overflow-hidden`}
+                      style={{
+                        width: `${
+                          status === "긍정적"
+                            ? "1%"
+                            : status === "부정적"
+                            ? "70%"
+                            : "20%"
+                        }`,
+                      }}
                     />
                   </div>
                 </div>
