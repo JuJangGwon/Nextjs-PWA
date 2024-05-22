@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 export default function DiaryAnalyze({
   setIsEditorOpen,
+  setIsAnalize,
   feel,
   diaryText,
 }: any) {
@@ -46,7 +47,12 @@ export default function DiaryAnalyze({
       <div className="flex justify-between">
         <div />
         <button
-          onClick={() => setIsEditorOpen(false)}
+          onClick={() => {
+            if (feel === "fail" || feel === "") {
+              setIsAnalize(false);
+            }
+            setIsEditorOpen(false);
+          }}
           className="mr-8 mt-4 text-xl"
         >
           X

@@ -28,7 +28,6 @@ export default function DiaryEditor({
       setTimeout(() => {
         setDiaryDatas(diaryText);
         setIsEditorOpen(false);
-        setIsAnalize(true);
       }, 3000);
     } else {
       alert("일기 내용을 최소 30자 이상 입력해주세요");

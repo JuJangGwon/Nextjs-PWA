@@ -54,6 +54,8 @@ export default function feelChecker(t: string) {
     "ㅈ같다",
     "번민",
     "불편함",
+    "힘들다",
+    "우울",
     "질투",
   ];
   const kors = [

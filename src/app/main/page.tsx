@@ -34,6 +34,7 @@ function getDayOfWeek(newDate: Date, num: number = 0) {
 const localContents = (day: number) => {
   let data = null;
   if (typeof window !== "undefined") {
+    if (localStorage.getItem(`${day.toString()}f`) === "fail") return "";
     data = localStorage.getItem(`${day.toString()}c`);
   }
   return data ? data : "";
@@ -44,6 +45,9 @@ const localFeel = (day: number) => {
   if (typeof window !== "undefined") {
     data = localStorage.getItem(`${day.toString()}f`);
   }
+  if (data === "fail") {
+    return "";
+  }
   return data ? data : "";
 };
 
@@ -52,8 +56,8 @@ export default function Main() {
     {
       num: newDate.getDate() - 3,
       days: getDayOfWeek(newDate, -3),
-      content: localContents(newDate.getDate() - 3),
       feel: localFeel(newDate.getDate() - 3),
+      content: localContents(newDate.getDate() - 3),
     },
     {
       num: newDate.getDate() - 2,
@@ -114,9 +118,13 @@ export default function Main() {
             setDiaryDatas={(str: string) =>
               setDiaryDatas((data: any) => {
                 const stat = feelChecker(str);
-                localStorage.setItem(`${newDate.getDate().toString()}c`, str);
-                localStorage.setItem(`${newDate.getDate().toString()}f`, stat);
+                setIsAnalize(true);
                 if (stat !== "fail") {
+                  localStorage.setItem(`${newDate.getDate().toString()}c`, str);
+                  localStorage.setItem(
+                    `${newDate.getDate().toString()}f`,
+                    stat
+                  );
                   data[3].content = str;
                   data[3].feel = stat;
                 }
