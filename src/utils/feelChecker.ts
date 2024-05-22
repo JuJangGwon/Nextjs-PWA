@@ -158,7 +158,7 @@ export default function feelChecker(t: string) {
       korCount++;
     }
   });
-  if (korCount > 5) {
+  if (korCount > 29) {
     return "fail";
   }
   let alphaCount = 0;
@@ -170,7 +170,7 @@ export default function feelChecker(t: string) {
   });
   console.log(alphaCount, korCount);
 
-  if (alphaCount > 20) {
+  if (alphaCount > 29) {
     return "fail";
   }
   let happyCount = 0;
