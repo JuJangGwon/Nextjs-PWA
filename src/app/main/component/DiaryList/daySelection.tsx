@@ -27,6 +27,12 @@ export default function DaySelection({ days }: any) {
     return "";
   }
 
+  function onClickDayButton(index: number) {
+    if(!days[index].feel){
+      alert("해당일자에 작성된 일기 내용이 없습니다!")
+    }
+  }
+
   return (
     <div className="flex h-[8rem] w-full my-2 bg-[#01C1F8] border-t-[0.01rem] border-black px-2">
       {days.map((item: any, index: number) =>
@@ -46,7 +52,11 @@ export default function DaySelection({ days }: any) {
             </div>
           </div>
         ) : (
-          <div className="w-full mx-auto mt-2" key={item.days}>
+          <button
+            className="w-full mx-auto mt-2"
+            key={item.days}
+            onClick={() => onClickDayButton(index)}
+          >
             <p className="text-center">{item.num}</p>
             <p className="text-center text-slate-200">{item.days}</p>
             <div className="w-[93%] h-[55%] mx-auto border-2 bg-gray-200">
@@ -56,7 +66,7 @@ export default function DaySelection({ days }: any) {
                 </p>
               ) : null}{" "}
             </div>
-          </div>
+          </button>
         )
       )}
     </div>

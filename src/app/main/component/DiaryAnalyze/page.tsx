@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
 
-import feelChecker from "@/utils/feelChecker";
 export default function DiaryAnalyze({
   setIsEditorOpen,
   feel,
@@ -33,6 +32,12 @@ export default function DiaryAnalyze({
       setNum1(Math.floor(Math.random()) * 50 + 1);
     }
   }, [feel]);
+
+  useEffect(() => {
+    if (num1 !== 1 && num2 !== 1) {
+      console.log(num1, num2, num3);
+    }
+  }, [num1, num2, num3]);
 
   useEffect(() => {});
 
