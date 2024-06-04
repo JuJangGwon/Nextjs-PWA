@@ -49,7 +49,11 @@ export default function DiaryAnalyze({
     }
   }, [num1, num2, num3]);
 
-  useEffect(() => {});
+  function onClickDeleteBtn() {
+    localStorage.removeItem("5f");
+    localStorage.removeItem("5c");
+    setIsEditorOpen(false);
+  }
 
   return (
     <div className="bg-gray-100 w-full h-full">
@@ -126,12 +130,20 @@ export default function DiaryAnalyze({
               </p>
             </div>
           </div>
-          <button
-            onClick={() => setIsEditorOpen(false)}
-            className="bg-[#01C1F8] w-[92%] h-[4rem] rounded-md text-white mx-4 mt-6"
-          >
-            감정 통계 보러가기
-          </button>
+          <div className="flex">
+            <button
+              onClick={() => setIsEditorOpen(false)}
+              className="bg-[#01C1F8] w-[92%] h-[4rem] rounded-md text-white mx-4 mt-6"
+            >
+              감정 통계 보러가기
+            </button>
+            <button
+              onClick={onClickDeleteBtn}
+              className="bg-red-400 w-[92%] h-[4rem] rounded-md text-white mx-4 mt-6"
+            >
+              삭제하기
+            </button>
+          </div>
         </div>
       ) : (
         <div className="bg-white w-[94%] h-[40rem] mx-auto">

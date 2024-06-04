@@ -7,6 +7,10 @@ import Calendar from "./calendar";
 export default function DiaryStatics({ onClickExist, days }: any) {
   const [selected, setSelected] = useState(true);
   const [emoticon, setEmoticon] = useState("");
+  const [aangry, setAngry] = useState(0);
+  const [ahappy, setHappy] = useState(0);
+  const [ssad, setSad] = useState(0);
+
   const [status, setStatus] = useState("none");
   useEffect(() => {
     if (days) {
@@ -28,7 +32,11 @@ export default function DiaryStatics({ onClickExist, days }: any) {
           sad++;
         }
       });
-      if (happy === 0 && angry === 0 && normal === 0) {
+      setAngry(angry);
+      setHappy(happy);
+      setSad(sad);
+
+      if (happy === 0 && angry === 0 && sad === 0 && normal === 0) {
         setStatus("none");
         setEmoticon("😁");
       } else if (happy > angry && normal < happy) {
@@ -116,9 +124,7 @@ export default function DiaryStatics({ onClickExist, days }: any) {
                         width: `${
                           status === "긍정적"
                             ? "60%"
-                            : status === "부정적"
-                            ? "1%"
-                            : "20%"
+                            : `${(ahappy * 5).toString()}%`
                         }`,
                       }}
                     />
@@ -131,11 +137,9 @@ export default function DiaryStatics({ onClickExist, days }: any) {
                       className={`h-[1.6rem] bg-yellow-500  rounded-full overflow-hidden`}
                       style={{
                         width: `${
-                          status === "긍정적"
-                            ? "20%"
-                            : status === "부정적"
-                            ? "25%"
-                            : "70%"
+                          status === "슬픔"
+                            ? "70%"
+                            : `${(ssad * 5).toString()}%`
                         }`,
                       }}
                     />
@@ -148,11 +152,9 @@ export default function DiaryStatics({ onClickExist, days }: any) {
                       className={`h-[1.6rem] bg-red-500  rounded-full overflow-hidden`}
                       style={{
                         width: `${
-                          status === "긍정적"
-                            ? "1%"
-                            : status === "부정적"
+                          status === "부정적"
                             ? "70%"
-                            : "20%"
+                            : `${(aangry * 5).toString()}%`
                         }`,
                       }}
                     />
