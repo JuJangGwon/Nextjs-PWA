@@ -2,7 +2,11 @@
 
 import { useState, useEffect } from "react";
 
-export default function DaySelection({ days }: any) {
+export default function DaySelection({
+  days,
+  setSelectedDay,
+  setIsEditorOpen,
+}: any) {
   const [emoticons, setEmoticons] = useState("😌");
 
   useEffect(() => {
@@ -17,7 +21,7 @@ export default function DaySelection({ days }: any) {
   }, [days]);
 
   function getEmoticons(item: any) {
-    if (item.feel === "happy") {
+    if (item.feel[0] === "happy") {
       return "😁";
     } else if (item.feel[0] === "angry") {
       return "😡";
@@ -32,7 +36,11 @@ export default function DaySelection({ days }: any) {
   function onClickDayButton(index: number) {
     if (!days[index].feel) {
       alert("해당일자에 작성된 일기 내용이 없습니다!");
+      return;
     }
+    console.log(index);
+    setSelectedDay(index);
+    setIsEditorOpen(true);
   }
 
   return (

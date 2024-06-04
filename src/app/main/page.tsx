@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import feelChecker from "@/utils/feelChecker";
 import DiaryList from "./component/DiaryList";
@@ -45,10 +45,11 @@ const localFeel = (day: number) => {
   if (typeof window !== "undefined") {
     data = localStorage.getItem(`${day.toString()}f`);
   }
-  if (data === "fail") {
+  console.log(data);
+  if (data && data[0] === "fail") {
     return "";
   }
-  return data ? data : "";
+  return data ? JSON.parse(data) : "";
 };
 
 export default function Main() {
@@ -97,11 +98,17 @@ export default function Main() {
     },
   ];
 
+  console.log(days);
+  const [selectedDay, setSelectedDay] = useState(3);
   const [isEditorOpen, setIsEditorOpen] = useState(false);
   const [isAnalize, setIsAnalize] = useState(days[3].content ? true : false);
   const [isStatics, setIsStatics] = useState(false);
   const [diaryDatas, setDiaryDatas] = useState(days);
-
+  useEffect(() => {
+    console.log("*");
+    console.log(selectedDay);
+    console.log(diaryDatas[selectedDay].content);
+  }, [diaryDatas, selectedDay]);
   return (
     <main className="min-w-[360px] max-w-[600px] mx-auto h-full bg-white">
       {isStatics && (
@@ -118,12 +125,13 @@ export default function Main() {
             setDiaryDatas={(str: string) =>
               setDiaryDatas((data: any) => {
                 const stat = feelChecker(str);
+                console.log(stat[0]);
                 setIsAnalize(true);
-                if (stat !== "fail") {
+                if (stat[0] !== "fail") {
                   localStorage.setItem(`${newDate.getDate().toString()}c`, str);
                   localStorage.setItem(
                     `${newDate.getDate().toString()}f`,
-                    stat
+                    JSON.stringify(stat)
                   );
                   data[3].content = str;
                   data[3].feel = stat;
@@ -135,18 +143,20 @@ export default function Main() {
         ) : (
           <DiaryAnalyze
             setIsEditorOpen={setIsEditorOpen}
-            diaryText={diaryDatas[3].content}
-            feel={diaryDatas[3].feel}
+            diaryText={diaryDatas[selectedDay].content}
+            feel={diaryDatas[selectedDay].feel}
           />
         ))}
       {!isEditorOpen && !isStatics && (
         <div className="w-full h-fit">
           <DiaryList
-            setDiaryDatas={setDiaryDatas}
+            setIsEditorOpen={setIsEditorOpen}
+            setSelectedDay={(day: number) => setSelectedDay(day)}
             setIsStatics={setIsStatics}
             days={diaryDatas}
           />
           <DiaryContent
+            setSelectedDay={(day: number) => setSelectedDay(day)}
             setIsEditorOpen={setIsEditorOpen}
             diaryData={diaryDatas[3]}
           />

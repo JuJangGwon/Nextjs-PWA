@@ -206,7 +206,7 @@ export default function feelChecker(t: string) {
     }
   });
   if (korCount > 29) {
-    return "fail";
+    return ["fail"];
   }
   let alphaCount = 0;
 
@@ -218,7 +218,7 @@ export default function feelChecker(t: string) {
   console.log(alphaCount, korCount);
 
   if (alphaCount > 29) {
-    return "fail";
+    return ["fail"];
   }
   let happyCount = 0;
   happyWords.forEach((word) => {
