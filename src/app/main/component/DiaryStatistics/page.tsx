@@ -2,6 +2,7 @@
 
 import { getHappy, getAngry, getNormal } from "@/utils/getFeelStatic";
 import { useState, useEffect } from "react";
+import Calendar from "./calendar";
 
 export default function DiaryStatics({ onClickExist, days }: any) {
   const [selected, setSelected] = useState(true);
@@ -167,7 +168,7 @@ export default function DiaryStatics({ onClickExist, days }: any) {
           </div>
         </div>
       ) : (
-        <p>현재 구현 진행중입니다</p>
+        <Calendar />
       )}
     </div>
   );
