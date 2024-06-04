@@ -12,15 +12,19 @@ export default function DiaryStatics({ onClickExist, days }: any) {
       let happy = 0;
       let angry = 0;
       let normal = 0;
+      let sad = 0;
       days.forEach((item: any) => {
-        if (item.feel === "happy") {
+        if (item.feel[0] === "happy") {
           happy++;
         }
-        if (item.feel === "angry") {
+        if (item.feel[0] === "angry") {
           angry++;
         }
-        if (item.feel === "normal") {
+        if (item.feel[0] === "normal") {
           normal++;
+        }
+        if (item.feel[0] === "sad") {
+          sad++;
         }
       });
       if (happy === 0 && angry === 0 && normal === 0) {
@@ -32,8 +36,11 @@ export default function DiaryStatics({ onClickExist, days }: any) {
       } else if (happy < angry && normal < angry) {
         setStatus("부정적");
         setEmoticon("😡");
-      } else if (happy === angry || (normal > happy && normal > angry)) {
-        setStatus("중립적");
+      } else if (sad > angry && happy < sad) {
+        setStatus("슬픔");
+        setEmoticon("😌");
+      } else {
+        setStatus("중립");
         setEmoticon("😌");
       }
     }
@@ -117,7 +124,7 @@ export default function DiaryStatics({ onClickExist, days }: any) {
                   </div>
                 </div>
                 <div className="flex w-[92%] mx-auto mt-2">
-                  <p className="mx-3 font-bold ">중립</p>
+                  <p className="mx-3 font-bold ">슬픔</p>
                   <div className="w-[80%] h-[1.6rem] bg-gray-200 rounded-full overflow-hidden">
                     <div
                       className={`h-[1.6rem] bg-yellow-500  rounded-full overflow-hidden`}
@@ -156,7 +163,7 @@ export default function DiaryStatics({ onClickExist, days }: any) {
             )}
             {status === "긍정적" && getHappy()}
             {status === "부정적" && getAngry()}
-            {status === "중립적" && getNormal()}
+            {status === "슬픔" && getNormal()}
           </div>
         </div>
       ) : (
