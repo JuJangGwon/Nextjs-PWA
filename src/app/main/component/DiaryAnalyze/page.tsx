@@ -15,23 +15,32 @@ export default function DiaryAnalyze({
   const [num3, setNum3] = useState(1);
 
   useEffect(() => {
-    if (feel === "happy") {
+    if (feel[0] === "happy") {
       setEmoticons("😁");
       setMine("행복함");
-      setNum1(50 + Math.floor(Math.random() * 15));
-      setNum2(Math.floor(Math.random() * 20) + 1);
-    } else if (feel === "angry") {
+      setNum1(50 + Math.floor(Math.random() * 15) + feel[1]);
+      setNum2(Math.min(25, feel[3] * 3));
+      setNum3(Math.min(25, feel[2] * 3));
+    } else if (feel[0] === "angry") {
       setEmoticons("😡");
       setMine("화남");
-      setNum3(60 + Math.floor(Math.random()) * 15 + 1);
-      setNum2(Math.floor(Math.random()) * 20 + 1);
-    } else if (feel === "normal") {
+      setNum3(50 + Math.floor(Math.random() * 15) + feel[3]);
+      setNum1(Math.min(25, feel[1] * 3));
+      setNum2(Math.min(25, feel[2] * 3));
+    } else if (feel[0] === "sad") {
+      setEmoticons("😭");
+      setMine("슬픔");
+      setNum2(50 + Math.floor(Math.random() * 15) + feel[2]);
+      setNum1(Math.min(25, feel[1] * 3));
+      setNum3(Math.min(25, feel[3] * 3));
+    } else if (feel[0] === "normal") {
       setEmoticons("😌");
       setMine("평범");
-      setNum3(Math.floor(Math.random()) * 45 + 1);
-      setNum2(60 + Math.floor(Math.random()) * 20 + 1);
-      setNum1(Math.floor(Math.random()) * 50 + 1);
+      setNum1(Math.min(45, feel[1] * 3));
+      setNum2(Math.min(45, feel[3] * 3));
+      setNum3(Math.min(45, feel[2] * 3));
     }
+    console.log(feel);
   }, [feel]);
 
   useEffect(() => {
@@ -89,7 +98,7 @@ export default function DiaryAnalyze({
                 </div>
               </div>
               <div className="flex w-[92%] mx-auto mt-2">
-                <p className="mx-3 font-bold ">중립</p>
+                <p className="mx-3 font-bold ">우울</p>
                 <div className="w-[80%] h-[1.6rem] bg-gray-200 rounded-full overflow-hidden">
                   <div
                     className={`h-[1.6rem] bg-yellow-500  rounded-full overflow-hidden`}
@@ -100,7 +109,7 @@ export default function DiaryAnalyze({
                 </div>
               </div>
               <div className="flex w-[92%] mx-auto my-2">
-                <p className="mx-3 font-bold ">부정</p>
+                <p className="mx-3 font-bold ">분노</p>
                 <div className="w-[80%] h-[1.6rem] bg-gray-200 rounded-full overflow-hidden">
                   <div
                     className={`h-[1.6rem] bg-red-500  rounded-full overflow-hidden`}

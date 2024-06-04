@@ -19,17 +19,19 @@ export default function DaySelection({ days }: any) {
   function getEmoticons(item: any) {
     if (item.feel === "happy") {
       return "😁";
-    } else if (item.feel === "angry") {
+    } else if (item.feel[0] === "angry") {
       return "😡";
-    } else if (item.feel === "normal") {
+    } else if (item.feel[0] === "normal") {
       return "😌";
+    } else if (item.feel[0] === "sad") {
+      return "😭";
     }
     return "";
   }
 
   function onClickDayButton(index: number) {
-    if(!days[index].feel){
-      alert("해당일자에 작성된 일기 내용이 없습니다!")
+    if (!days[index].feel) {
+      alert("해당일자에 작성된 일기 내용이 없습니다!");
     }
   }
 

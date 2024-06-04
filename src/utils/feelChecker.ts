@@ -55,8 +55,53 @@ export default function feelChecker(t: string) {
     "번민",
     "불편함",
     "힘들다",
-    "우울",
     "질투",
+  ];
+  const sadWords = [
+    "회상",
+    "이별",
+    "분리",
+    "분리 불안",
+    "설움",
+    "서러움",
+    "허전함",
+    "슬프",
+    "눈물",
+    "슬퍼",
+    "울고",
+    "엉엉",
+    "슬픔",
+    "우울",
+    "눈물",
+    "슬펐",
+    "우울함",
+    "비통",
+    "서럽",
+    "그리움",
+    "외로움",
+    "쓸쓸함",
+    "낙담",
+    "상심",
+    "절망",
+    "비애",
+    "고독",
+    "비참",
+    "비참함",
+    "침울",
+    "우울감",
+    "마음 아픔",
+    "괴로움",
+    "비탄",
+    "상실",
+    "후회",
+    "한탄",
+    "애도",
+    "눈물 나",
+    "서운함",
+    "비탄감",
+    "고통",
+    "괴로웠",
+    "소외감",
   ];
   const kors = [
     "ㄱ",
@@ -188,15 +233,26 @@ export default function feelChecker(t: string) {
       angryCount++;
     }
   });
-
-  if (happyCount === 0 && angryCount === 0) {
-    return "fail";
+  let sadCount = 0;
+  sadWords.forEach((word) => {
+    if (t.includes(word)) {
+      sadCount++;
+    }
+  });
+  if (happyCount === 0 && angryCount === 0 && sadCount === 0) {
+    return ["fail"];
   }
-  if (happyCount > angryCount) {
-    return "happy";
+  if (happyCount > angryCount && happyCount > sadCount) {
+    return ["happy", happyCount, angryCount, sadCount];
   }
-  if (happyCount < angryCount) {
-    return "angry";
+  if (happyCount < angryCount && sadCount < angryCount) {
+    return ["angry", happyCount, angryCount, sadCount];
   }
-  return "normal";
+  if (happyCount < sadCount && angryCount < sadCount) {
+    return ["sad", happyCount, angryCount, sadCount];
+  }
+  if (happyCount === sadCount && angryCount === sadCount) {
+    return ["normal", happyCount, angryCount, sadCount];
+  }
+  return ["normal", happyCount, angryCount, sadCount];
 }
