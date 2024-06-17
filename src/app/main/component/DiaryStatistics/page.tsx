@@ -1,16 +1,98 @@
 "use client";
 
+import { Line } from "react-chartjs-2";
 import { getHappy, getAngry, getNormal } from "@/utils/getFeelStatic";
 import { useState, useEffect } from "react";
 import Calendar from "./calendar";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  PointElement,
+  Legend,
+  LineElement,
+} from "chart.js";
+
+// 필요한 차트 구성 요소 등록
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+  PointElement,
+  LineElement
+);
 
 export default function DiaryStatics({ onClickExist, days }: any) {
   const [selected, setSelected] = useState(true);
   const [emoticon, setEmoticon] = useState("");
-  const [aangry, setAngry] = useState(0);
-  const [ahappy, setHappy] = useState(0);
-  const [ssad, setSad] = useState(0);
 
+  const data = {
+    labels: days.map((item: any) => item.num),
+    datasets: [
+      {
+        label: "6.10~6.17",
+        backgroundColor: "rgba(75,192,192,0.2)",
+        borderColor: "rgba(75,192,192,1)",
+        borderWidth: 1,
+        hoverBackgroundColor: "rgba(75,192,192,0.4)",
+        hoverBorderColor: "rgba(75,192,192,1)",
+        data: days.map((item: any) => {
+          switch (item.feel[0]) {
+            case "happy":
+              return 62 + Math.floor(Math.random() * 5);
+              break;
+            case "sad":
+              return 40 + Math.floor(Math.random() * 5);
+              break;
+            case "angry":
+              return 18 - Math.floor(Math.random() * 5);
+              break;
+            default:
+              return null;
+              break;
+          }
+        }),
+      },
+    ],
+  };
+  const options = {
+    maintainAspectRatio: false,
+    scales: {
+      y: {
+        ticks: {
+          callback: function (value : any) {
+            if (value === 80) {
+              return "";
+            } else if (value === 60) {
+              return "happy";
+            } else if (value === 40) {
+              return "sad";
+            } else if (value === 20) {
+              return "angry";
+            } else if (value === 0) {
+              return "";
+            } else {
+              return "";
+            }
+          },
+          stepSize: 20, // 레이블 간의 간격
+          max: 80, // y축의 최대값
+          min: 0, // y축의 최소값
+        },
+        // y축에 모든 레이블을 항상 표시
+        afterDataLimits: (axis : any) => {
+          axis.max = 80;
+          axis.min = 0;
+        },
+      },
+    },
+  };
   const [status, setStatus] = useState("none");
   useEffect(() => {
     if (days) {
@@ -32,9 +114,7 @@ export default function DiaryStatics({ onClickExist, days }: any) {
           sad++;
         }
       });
-      setAngry(angry);
-      setHappy(happy);
-      setSad(sad);
+ 
 
       if (happy === 0 && angry === 0 && sad === 0 && normal === 0) {
         setStatus("none");
@@ -111,56 +191,7 @@ export default function DiaryStatics({ onClickExist, days }: any) {
               </p>
             </h1>
             {status !== "" ? (
-              <div>
-                <p className="text-center font-bold my-2">
-                  {`주장권님의 감정은 ${status}일 때가 많아요`}
-                </p>
-                <div className="flex w-[92%] mx-auto">
-                  <p className="mx-3 font-bold ">긍정</p>
-                  <div className="w-[80%] h-[1.6rem] bg-gray-200 rounded-full overflow-hidden">
-                    <div
-                      className={`h-[1.6rem] bg-green-500  rounded-full overflow-hidden`}
-                      style={{
-                        width: `${
-                          status === "긍정적"
-                            ? "60%"
-                            : `${(ahappy * 5).toString()}%`
-                        }`,
-                      }}
-                    />
-                  </div>
-                </div>
-                <div className="flex w-[92%] mx-auto mt-2">
-                  <p className="mx-3 font-bold ">슬픔</p>
-                  <div className="w-[80%] h-[1.6rem] bg-gray-200 rounded-full overflow-hidden">
-                    <div
-                      className={`h-[1.6rem] bg-yellow-500  rounded-full overflow-hidden`}
-                      style={{
-                        width: `${
-                          status === "슬픔"
-                            ? "70%"
-                            : `${(ssad * 5).toString()}%`
-                        }`,
-                      }}
-                    />
-                  </div>
-                </div>
-                <div className="flex w-[92%] mx-auto my-2">
-                  <p className="mx-3 font-bold ">부정</p>
-                  <div className="w-[80%] h-[1.6rem] bg-gray-200 rounded-full overflow-hidden">
-                    <div
-                      className={`h-[1.6rem] bg-red-500  rounded-full overflow-hidden`}
-                      style={{
-                        width: `${
-                          status === "부정적"
-                            ? "70%"
-                            : `${(aangry * 5).toString()}%`
-                        }`,
-                      }}
-                    />
-                  </div>
-                </div>
-              </div>
+              <Line options={options} data={data} />
             ) : (
               <h1>통계 데이터가 부족합니다</h1>
             )}

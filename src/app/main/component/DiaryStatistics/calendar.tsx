@@ -1,6 +1,6 @@
 export default function Calendar() {
   interface boxtype {
-    i: number;
+    i?: number;
   }
   function Box({ i }: boxtype) {
     let feel: string | null = "";
@@ -10,14 +10,16 @@ export default function Calendar() {
     function getFeel() {
       if (feel) {
         feel = JSON.parse(feel);
-        if (feel[0] === "happy") {
-          return "😁";
-        } else if (feel[0] === "angry") {
-          return "😡";
-        } else if (feel[0] === "normal") {
-          return "😌";
-        } else if (feel[0] === "sad") {
-          return "😭";
+        if (feel !== null) {
+          if (feel[0] === "happy") {
+            return "😁";
+          } else if (feel[0] === "angry") {
+            return "😡";
+          } else if (feel[0] === "normal") {
+            return "😌";
+          } else if (feel[0] === "sad") {
+            return "😭";
+          }
         }
       }
     }
