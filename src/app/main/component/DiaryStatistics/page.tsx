@@ -33,7 +33,7 @@ export default function DiaryStatics({ onClickExist, days }: any) {
   const [emoticon, setEmoticon] = useState("");
 
   const data = {
-    labels: days.map((item: any) => item.num),
+    labels: days ? days.map((item: any) => item.num) : [],
     datasets: [
       {
         label: "6.10~6.17",
@@ -42,22 +42,24 @@ export default function DiaryStatics({ onClickExist, days }: any) {
         borderWidth: 1,
         hoverBackgroundColor: "rgba(75,192,192,0.4)",
         hoverBorderColor: "rgba(75,192,192,1)",
-        data: days.map((item: any) => {
-          switch (item.feel[0]) {
-            case "happy":
-              return 62 + Math.floor(Math.random() * 5);
-              break;
-            case "sad":
-              return 40 + Math.floor(Math.random() * 5);
-              break;
-            case "angry":
-              return 18 - Math.floor(Math.random() * 5);
-              break;
-            default:
-              return null;
-              break;
-          }
-        }),
+        data: days
+          ? days.map((item: any) => {
+              switch (item.feel[0]) {
+                case "happy":
+                  return 62 + Math.floor(Math.random() * 5);
+                  break;
+                case "sad":
+                  return 40 + Math.floor(Math.random() * 5);
+                  break;
+                case "angry":
+                  return 18 - Math.floor(Math.random() * 5);
+                  break;
+                default:
+                  return null;
+                  break;
+              }
+            })
+          : [],
       },
     ],
   };
@@ -66,7 +68,7 @@ export default function DiaryStatics({ onClickExist, days }: any) {
     scales: {
       y: {
         ticks: {
-          callback: function (value : any) {
+          callback: function (value: any) {
             if (value === 80) {
               return "";
             } else if (value === 60) {
@@ -86,7 +88,7 @@ export default function DiaryStatics({ onClickExist, days }: any) {
           min: 0, // y축의 최소값
         },
         // y축에 모든 레이블을 항상 표시
-        afterDataLimits: (axis : any) => {
+        afterDataLimits: (axis: any) => {
           axis.max = 80;
           axis.min = 0;
         },
@@ -114,7 +116,6 @@ export default function DiaryStatics({ onClickExist, days }: any) {
           sad++;
         }
       });
- 
 
       if (happy === 0 && angry === 0 && sad === 0 && normal === 0) {
         setStatus("none");

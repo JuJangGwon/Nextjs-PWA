@@ -11,14 +11,13 @@ export default function Login() {
   const [i3, seti3] = useState("");
 
   function onClickLoginButton() {
-    console.log("(");
-    console.log(day);
     localStorage.setItem(`${day.toString()}c`, content);
     localStorage.setItem(
       `${day.toString()}f`,
       JSON.stringify([feel, parseInt(i1), parseInt(i2), parseInt(i3)])
     );
     console.log(day, content, feel, i1, i2, i3);
+    alert("등록되었습니다.");
   }
 
   return (
