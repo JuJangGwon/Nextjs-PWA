@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 export default function DiaryAnalyze({
   setIsEditorOpen,
   setIsAnalize,
+  onClickDeleteBtn,
   feel,
   diaryText,
 }: any) {
@@ -49,10 +50,12 @@ export default function DiaryAnalyze({
     }
   }, [num1, num2, num3]);
 
-  function onClickDeleteBtn() {
-    localStorage.removeItem("5f");
-    localStorage.removeItem("5c");
+  function onClickDeleteBtn1() {
+    localStorage.removeItem("19f");
+    localStorage.removeItem("19c");
+    alert("삭제 완료했습니다.");
     setIsEditorOpen(false);
+    onClickDeleteBtn();
   }
 
   return (
@@ -138,7 +141,7 @@ export default function DiaryAnalyze({
               감정 통계 보러가기
             </button>
             <button
-              onClick={onClickDeleteBtn}
+              onClick={onClickDeleteBtn1}
               className="bg-red-400 w-[92%] h-[4rem] rounded-md text-white mx-4 mt-6"
             >
               삭제하기

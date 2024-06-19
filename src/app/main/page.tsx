@@ -53,7 +53,7 @@ const localFeel = (day: number) => {
 };
 
 export default function Main() {
-  const days = [
+  let days = [
     {
       num: newDate.getDate() - 3,
       days: getDayOfWeek(newDate, -3),
@@ -98,17 +98,12 @@ export default function Main() {
     },
   ];
 
-  console.log(days);
   const [selectedDay, setSelectedDay] = useState(3);
   const [isEditorOpen, setIsEditorOpen] = useState(false);
   const [isAnalize, setIsAnalize] = useState(days[3].content ? true : false);
   const [isStatics, setIsStatics] = useState(false);
   const [diaryDatas, setDiaryDatas] = useState(days);
-  useEffect(() => {
-    console.log("*");
-    console.log(selectedDay);
-    console.log(diaryDatas[selectedDay].content);
-  }, [diaryDatas, selectedDay]);
+
   return (
     <main className="min-w-[360px] max-w-[600px] mx-auto h-full bg-white">
       {isStatics && (
@@ -144,6 +139,54 @@ export default function Main() {
           <DiaryAnalyze
             setIsEditorOpen={setIsEditorOpen}
             diaryText={diaryDatas[selectedDay].content}
+            onClickDeleteBtn={() => {
+              days = [
+                {
+                  num: newDate.getDate() - 3,
+                  days: getDayOfWeek(newDate, -3),
+                  feel: localFeel(newDate.getDate() - 3),
+                  content: localContents(newDate.getDate() - 3),
+                },
+                {
+                  num: newDate.getDate() - 2,
+                  days: getDayOfWeek(newDate, -2),
+                  content: localContents(newDate.getDate() - 2),
+                  feel: localFeel(newDate.getDate() - 2),
+                },
+                {
+                  num: newDate.getDate() - 1,
+                  days: getDayOfWeek(newDate, -1),
+                  content: localContents(newDate.getDate() - 1),
+                  feel: localFeel(newDate.getDate() - 1),
+                },
+                {
+                  num: newDate.getDate(),
+                  days: getDayOfWeek(newDate),
+                  content: localContents(newDate.getDate()),
+                  feel: localFeel(newDate.getDate()),
+                },
+                {
+                  num: newDate.getDate() + 1,
+                  days: getDayOfWeek(newDate, 1),
+                  content: localContents(newDate.getDate() + 1),
+                  feel: localFeel(newDate.getDate() + 1),
+                },
+                {
+                  num: newDate.getDate() + 2,
+                  days: getDayOfWeek(newDate, 2),
+                  content: localContents(newDate.getDate() + 2),
+                  feel: localFeel(newDate.getDate() + 2),
+                },
+                {
+                  num: newDate.getDate() + 3,
+                  days: getDayOfWeek(newDate, 3),
+                  content: localContents(newDate.getDate() + 3),
+                  feel: localFeel(newDate.getDate() + 3),
+                },
+              ];
+              window.location.reload();
+              setIsAnalize(days[3].content ? true : false);
+            }}
             feel={diaryDatas[selectedDay].feel}
           />
         ))}
